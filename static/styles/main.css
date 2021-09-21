@@ -25,44 +25,6 @@ body {
   max-width: 98rem;
 }
 
-header {
-  width: 100%;
-  padding: 2.4rem 0;
-  border-bottom: 1px solid #333;
-  position: fixed;
-  top: 0;
-  left: 0;
-  box-shadow: 0 20px 50px rgb(0 0 0 / 50%);
-  background-color: rgba(0, 0, 0, 0.274);
-  backdrop-filter: blur(5px);
-}
-
-header .content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header h1 {
-  font-style: italic;
-}
-
-header h1 span {
-  color: var(--primary-color);
-}
-
-header ul {
-  display: flex;
-  align-items: center;
-  gap: 1.6rem;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-header a {
-  color: #f1f1f1;
-}
-
 /* =============== CONTENT =============== */
 .container {
   width: 100%;
@@ -77,12 +39,3 @@ main.content {
   flex-direction: column;
 }
 
-.title h1, header h1 span {
-  color: var(--primary-color);
-  font-weight: 600;
-  text-shadow: 0 0 10px #FF8C3B, 
-               0 0 40px #FF8C3B, 
-               0 0 80px #FF8C3B,
-               0 0 160px #FF8C3B,
-               0 0 240px #FF8C3B;
-}

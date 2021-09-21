@@ -6,6 +6,7 @@ body#index {
 
 .title {
   filter: url(#fire);
+  margin-bottom: 1.6rem;
 }
 
 .title h1 {
@@ -16,4 +17,49 @@ body#index {
 svg {
   width: 0;
   height: 0;
+}
+
+p {
+  margin-bottom: 3.2rem;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 3.2rem;
+}
+
+.button {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  padding: .8rem 3.2rem;
+  min-width: 16rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f1f1f1;
+  border-radius: 1.6rem;
+  overflow: hidden;
+  position: relative;
+  transition: all 400ms ease-in-out;
+}
+
+.button .hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--primary-color);
+  z-index: -1;
+  transition: all 400ms ease-in-out;
+}
+
+.button:hover {
+  color: #111;
+}
+
+.button:hover .hover {
+  width: 100%;
 }
