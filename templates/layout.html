@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+  {% block head %}
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/index.css">
+  <title>Birthdays50</title>
+  {% endblock head %}
+</head>
+<body id="{{ idPage }}">
+  <div class="container">
+    <header>
+      <div class="content">
+        <h1>Birthdays<span>50</span></h1>
+        <nav>
+          <ul>
+            <a href="/"><li>Login</li></a>
+            <a href="/"><li>Register</li></a>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="content">
+      {% block content %}
+      {% endblock content %}
+    </main>
+  </div>
+</body>
+</html>

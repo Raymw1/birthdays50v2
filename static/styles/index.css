@@ -1,0 +1,19 @@
+body#index {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),url(/assets/index.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.title {
+  filter: url(#fire);
+}
+
+.title h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: min(16vw, 12rem);
+}
+
+svg {
+  width: 0;
+  height: 0;
+}

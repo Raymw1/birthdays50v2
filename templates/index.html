@@ -1,13 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/main.css">
-  <title>Index</title>
-</head>
-<body>
-  <h1>Index</h1>
-</body>
-</html>
+{% extends "layout.html" %}
+{% set idPage = "index" %}
+
+{% block content %}
+  <div class="title">
+    <h1>Birthdays50</h1>
+  </div>
+  <svg>
+    <filter id="fire">
+        <feTurbulence id="turbulence" baseFrequency="0.1 0.1" numOctaves="2" seed="3">
+          <animate attributeName="baseFrequency" dur="10s" values="0.1 0.1; 0.12 0.2" repeatCount="indefinite"></animate>
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" scale="15"></feDisplacementMap>
+    </filter>
+  </svg>
+  <p>You will never forget your friends' birthday!</p>
+  <div>
+      <a href="/login">LOGIN</a>
+      <a href="/register">REGISTER</a>
+  </div>
+{% endblock content %}
