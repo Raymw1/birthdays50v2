@@ -3,13 +3,13 @@
 
 {% block head %}
   <link rel="stylesheet" href="/styles/form.css">
-  <title>Login</title>
+  <title>Register</title>
 {% endblock head %}
 
 {% block content %}
-    {% call form.render("login", "https://images.unsplash.com/photo-1616709676522-9861033271a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=327&q=80") %}
-    <form action="/login" class="login" method="POST">
-      <h2>Login</h2>
+    {% call form.render("register", "https://images.unsplash.com/photo-1565035010268-a3816f98589a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=388&q=80") %}
+    <form action="/register" class="register" method="POST">
+      <h2>Register</h2>
       <div class="input-group">
         <label for="email">Email</label>
         <input type="email" name="email" placeholder="Insert your email here">
@@ -18,7 +18,11 @@
         <label for="password">Password</label>
         <input type="password" name="password" placeholder="Insert your password here">
       </div>
-      <button type="submit">Login</button>
+      <div class="input-group">
+        <label for="passwordRepeat">Password confirmation</label>
+        <input type="password" name="passwordRepeat" placeholder="Confirm your password here">
+      </div>
+      <button type="submit">Register</button>
     </form>
     {% endcall %}
 {% endblock content %}
