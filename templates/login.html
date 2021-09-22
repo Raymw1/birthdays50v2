@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block head %}
+  <link rel="stylesheet" href="/styles/form.css">
+  <title>Login</title>
+{% endblock head %}
+
+{% block content %}
+  <div class="box-container login">
+    <div class="side-image"></div>
+    <form action="/login" class="login" method="POST">
+      <h2>Register</h2>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="Insert your email here">
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="Insert your password here">
+      </div>
+      <div class="input-group">
+        <label for="passwordRepeat">Password confirmation</label>
+        <input type="password" name="passwordRepeat" placeholder="Confirm your password here">
+      </div>
+      <button type="button">Register</button>
+    </form>
+  </div>
+{% endblock content %}
