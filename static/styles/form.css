@@ -19,15 +19,19 @@ form.login, form.register {
 .input-group input, button {
   width: 100%;
   padding: .8rem 1.6rem;
-  background-color: transparent;
-  border: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid transparent;
   outline: none;
-  border-radius: 4rem;
+  border-radius: 1rem;
   font-weight: 500;
   font-size: 1.8rem;
   color: var(--primary-color);
-  box-shadow: inset -1px -1px 6px rgba(255, 255, 255, 0.05),
-              inset 1px 1px 6px rgba(0, 0, 0, 0.5);
+  /* box-shadow: inset -1px -1px 6px rgba(255, 255, 255, 0.05),
+              inset 1px 1px 6px rgba(0, 0, 0, 0.5); */
+}
+
+.input-group input:focus-within {
+  border: 1px solid var(--primary-color);
 }
 
 .input-group input::placeholder {

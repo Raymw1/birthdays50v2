@@ -43,7 +43,7 @@ header a {
   position: relative;
 }
 
-header a::after {
+header ul a::after {
   content: "";
   width: 0;
   height: 2px;
@@ -54,7 +54,7 @@ header a::after {
   transition: all 400ms ease-in-out;
 }
 
-header a:hover::after {
+header ul a:hover::after {
   width: 100%;
 }
 
