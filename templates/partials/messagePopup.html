@@ -1,0 +1,13 @@
+<div class="message-popup {{ 'active' if success or error }}">
+  <img src="{{ '/assets/success.svg' if success }}{{ '/assets/error.png' if error }}" 
+  alt="{{ 'success' if success}}{{ 'error' if error }}">
+  {{ error or success }}
+</div>
+{% if error or success %}
+<script>
+  document.querySelector(".message-popup").classList.add("active");
+  setTimeout(() => {
+  document.querySelector(".message-popup").setAttribute("class", "message-popup");
+  }, 4000);
+</script>
+{% endif %}

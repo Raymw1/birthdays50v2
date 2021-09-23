@@ -12,7 +12,11 @@
       <h2>Register</h2>
       <div class="input-group">
         <label for="email">Email</label>
-        <input type="email" name="email" placeholder="Insert your email here">
+        <input type="email" name="email" placeholder="Insert your email here" value="{{ data.email if data  }}">
+      </div>
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" placeholder="Insert your username here" value="{{ data.username if data }}">
       </div>
       <div class="input-group">
         <label for="password">Password</label>

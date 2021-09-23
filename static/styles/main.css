@@ -54,6 +54,10 @@ main.content {
   align-items: center;
 }
 
+.box-container.register {
+  margin-top: 8rem;
+}
+
 .box-container h2, form button {
   color: var(--primary-color);
   text-shadow: 0 0 10px #FF8C3B;
@@ -62,4 +66,36 @@ main.content {
 
 .box-container h2 {
   margin-bottom: 3.2rem;
+}
+
+
+/* ================ MESSAGE POPUP ================ */
+.message-popup {
+  position: fixed;
+  bottom: 1.4rem;
+  right: -25rem;
+  background-color: var(--dark-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  font-weight: 500;
+  max-width: min(90%, 25rem);
+  word-wrap: break-word;
+  word-break: normal;
+  opacity: 0;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+  transition: all 400ms ease-in-out;
+}
+
+.message-popup.active {
+  right: 1.4rem;
+  opacity: 1;
+}
+
+.message-popup img {
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-right: 1.2rem;
 }

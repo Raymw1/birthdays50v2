@@ -1,6 +1,10 @@
+from models.User import createUser
 import os
+from tempfile import mkdtemp
 from flask import Flask, redirect, render_template, request, session, Response
 from models import database
+from models.validators import checkUsers
+from helpers import apology
 from flask_session import Session
 
 app = Flask(__name__, static_url_path='', static_folder='static')
@@ -29,9 +33,24 @@ db = database.db
 def index():
   return render_template("index.html")
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
-  return render_template("register.html")
+  if request.method == "POST":
+    email = request.form.get("email")
+    username = request.form.get("username")
+    password = request.form.get("password")
+    passwordRepeat = request.form.get("passwordRepeat")
+    if not email or not username or not password or not passwordRepeat:
+      return apology("register.html", "Please, fill all fields!", 400, {"email": email, "username": username})
+    if password != passwordRepeat:
+      return apology("register.html", "Passwords didn't match!", 400, {"email": email, "username": username})
+    if checkUsers(email, username):
+      return apology("register.html", "User already registered!", 400, {"email": email, "username": username})
+    user_id = createUser(email, username, password);
+    session["user_id"] = user_id
+    return render_template("index.html")
+  else:
+    return render_template("register.html")
 
 @app.route("/login")
 def login():
