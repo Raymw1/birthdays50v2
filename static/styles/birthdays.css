@@ -7,6 +7,17 @@ main.content {
   padding: 3.2rem;
 }
 
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: .8rem;
+}
+
+.input-grid .input-group {
+  margin: 0;
+}
+
 .birthdays {
   width: 100%;
   margin-top: 4rem;

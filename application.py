@@ -53,7 +53,7 @@ def register():
       return apology("register.html", "User already registered!", 400, data)
     user_id = createUser(email, username, password);
     session["user_id"] = user_id
-    return render_template("birthdays.html")
+    return redirect("/birthdays")
   else:
     return render_template("register.html")
 
@@ -64,16 +64,16 @@ def login():
     email = request.form.get("email")
     password = request.form.get("password")
     data = {"email": email}
-    user = getUser(email)
     if not email or not password:
       return apology("login.html", "Please, fill all fields!", 400, data)
+    user = getUser(email)
     if not user:
       return apology("login.html", "User not registered!", 400, data)
     user = user[0]
     if not check_password_hash(user["password"], password):
       return apology("login.html", "Invalid password!", 401 , data)
     session["user_id"] = user["id"]
-    return render_template("birthdays.html")
+    return redirect("/birthdays")
   else:
     return render_template("login.html")
 
@@ -102,3 +102,7 @@ def birthdays():
   else:
     birthdays = getBirths(session["user_id"])
     return render_template("birthdays.html", birthdays=birthdays)
+
+
+# @app.route("/logout")
+

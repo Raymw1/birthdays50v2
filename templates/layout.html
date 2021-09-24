@@ -22,8 +22,12 @@
         <h1><a href="/">Birthdays<span>50</span></a></h1>
         <nav>
           <ul>
+            {% if session.user_id %}
+            <a href="/birthdays"><li>Birthdays</li></a>
+            {% else %}
             <a href="/login"><li>Login</li></a>
             <a href="/register"><li>Register</li></a>
+            {% endif %}
           </ul>
         </nav>
       </div>
