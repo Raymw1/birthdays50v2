@@ -4,6 +4,9 @@ from flask import redirect, render_template, session
 def apology(page, message, code=400, data=None):
   return render_template(page, error=message, data=data), code
 
+def apologyBirth(page, message, birthdays, code=400, data=None):
+  return render_template(page, error=message, data=data, birthdays=birthdays), code
+
 def login_required(f):
   """
   Decorate routes to require login.

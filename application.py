@@ -1,11 +1,11 @@
-from models.Birthday import createBirth, getBirths
+from models.Birthday import createBirth, deleteBirth, getBirth, getBirths
 from models.User import createUser, getUser
 import os
 from tempfile import mkdtemp
 from flask import Flask, redirect, render_template, request, session, Response
 from models import database
 from models.validators import checkBirth, checkUsers
-from helpers import apology, is_logged, login_required
+from helpers import apology, apologyBirth, is_logged, login_required
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -87,19 +87,21 @@ def login():
 def birthdays():
   if request.method == "POST":
     name = request.form.get("name")
-    month = int(request.form.get("month"))
-    day = int(request.form.get("day"))
+    month = request.form.get("month")
+    day = request.form.get("day")
     data = {"name": name, "day": day, "month": month}
-
+    birthdays = getBirths(session["user_id"])
     if not name or not day or not month:
-      return apology("birthdays.html", "Please, fill all fields!", 400, data)
+      return apologyBirth("birthdays.html", "Please, fill all fields!", birthdays, 400, data)
+    month = int(month)
+    day = int(day)
     if not 12 >= month >= 1:
-      return apology("birthdays.html", "Please, insert a valid month!", 400, data)
+      return apologyBirth("birthdays.html", "Please, insert a valid month!", birthdays, 400, data)
     if (not 31 >= day >= 1) or (month in [4, 6, 9, 11] and day > 30) or (month == 2 and day > 29):
-      return apology("birthdays.html", "Please, insert a valid day!", 400, data)
+      return apologyBirth("birthdays.html", "Please, insert a valid day!", birthdays, 400, data)
 
     if checkBirth(name, session["user_id"]):
-      return apology("birthdays.html", "Birthday already exists!", 400, data)
+      return apologyBirth("birthdays.html", "Birthday already exists!", birthdays, 400, data)
 
     createBirth(name, month, day, session["user_id"])
     birthdays = getBirths(session["user_id"])
@@ -107,6 +109,26 @@ def birthdays():
   else:
     birthdays = getBirths(session["user_id"])
     return render_template("birthdays.html", birthdays=birthdays)
+
+
+# ------------------------- REMOVE BIRTHDAY --------------------------------
+@app.route("/remove-birthday", methods=["POST"])
+@login_required
+def removeBirthdays():
+  id = request.form.get("id")
+  birthdays = getBirths(session["user_id"])
+  if not id:
+    return apologyBirth("birthdays.html", "Please, choose a birthday!", birthdays, 400)
+  birthday = getBirth(id)
+  if not birthday:
+    return apologyBirth("birthdays.html", "Please, insert a valid birthday!", birthdays, 400)
+  birthday = birthday[0]
+  if birthday["user_id"] != session["user_id"]:
+    return apologyBirth("birthdays.html", "Please, insert a birthday from your list!", birthdays, 400)
+  deleteBirth(id)
+  birthdays = getBirths(session["user_id"])
+  return render_template("birthdays.html", birthdays=birthdays, success="Birthday removed!")
+
 
 
 # -------------------------  LOGOUT --------------------------------
