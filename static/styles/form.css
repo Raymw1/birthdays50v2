@@ -16,7 +16,7 @@ form.login, form.register {
   padding: 3.2rem;
 }
 
-.input-group input, button {
+.input-group input, button.button {
   width: 100%;
   padding: .8rem 1.6rem;
   background-color: rgba(0, 0, 0, 0.3);
@@ -38,13 +38,17 @@ form.login, form.register {
   color: #555;
 }
 
-form button {
+button {
+  cursor: pointer;
+}
+
+form button.button {
   margin-top: 2rem;
   box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.05),
               2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-form button:active {
+form button.button:active {
   box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.05),
   inset 2px 2px 6px rgba(0, 0, 0, 0.5);
   opacity: 0.8;

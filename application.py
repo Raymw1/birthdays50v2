@@ -1,9 +1,10 @@
+from models.Birthday import createBirth, getBirths
 from models.User import createUser, getUser
 import os
 from tempfile import mkdtemp
 from flask import Flask, redirect, render_template, request, session, Response
 from models import database
-from models.validators import checkUsers
+from models.validators import checkBirth, checkUsers
 from helpers import apology, is_logged, login_required
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -22,7 +23,7 @@ def after_request(response):
     return response
 
 # Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_FILE_DIR"] = mkdtemp()
+# app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
@@ -63,11 +64,12 @@ def login():
     email = request.form.get("email")
     password = request.form.get("password")
     data = {"email": email}
-    user = getUser(email)[0]
+    user = getUser(email)
     if not email or not password:
       return apology("login.html", "Please, fill all fields!", 400, data)
     if not user:
       return apology("login.html", "User not registered!", 400, data)
+    user = user[0]
     if not check_password_hash(user["password"], password):
       return apology("login.html", "Invalid password!", 401 , data)
     session["user_id"] = user["id"]
@@ -79,6 +81,24 @@ def login():
 @login_required
 def birthdays():
   if request.method == "POST":
-    return render_template("birthdays.html")
+    name = request.form.get("name")
+    month = int(request.form.get("month"))
+    day = int(request.form.get("day"))
+    data = {"name": name, "day": day, "month": month}
+
+    if not name or not day or not month:
+      return apology("birthdays.html", "Please, fill all fields!", 400, data)
+    if not 12 >= month >= 1:
+      return apology("birthdays.html", "Please, insert a valid month!", 400, data)
+    if (not 31 >= day >= 1) or (month in [4, 6, 9, 11] and day > 30) or (month == 2 and day > 29):
+      return apology("birthdays.html", "Please, insert a valid day!", 400, data)
+
+    if checkBirth(name, session["user_id"]):
+      return apology("birthdays.html", "Birthday already exists!", 400, data)
+
+    createBirth(name, month, day, session["user_id"])
+    birthdays = getBirths(session["user_id"])
+    return render_template("birthdays.html", birthdays=birthdays, success="Birthday added!")
   else:
-    return render_template("birthdays.html")
+    birthdays = getBirths(session["user_id"])
+    return render_template("birthdays.html", birthdays=birthdays)

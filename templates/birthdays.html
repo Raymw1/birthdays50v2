@@ -1,7 +1,54 @@
 {% extends "layout.html" %}
 
+{% block head %}
+  <link rel="stylesheet" href="/styles/form.css">
+  <link rel="stylesheet" href="/styles/birthdays.css">
+  <title>Birthdays</title>
+{% endblock head %}
+
 {% block content %}
-  <div class="title">
-    <h1>Birthdays50</h1>
+  <div class="box-container">
+    <h2>Add birthday</h2>
+    <form action="/birthdays" method="POST">
+      <div class="input-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" value="{{ data.name if data }}">
+      </div>
+      <div class="input-group">
+        <label for="month">Month</label>
+        <input type="number" name="month" value="{{ data.month if data }}">
+      </div>
+      <div class="input-group">
+        <label for="day">Day</label>
+        <input type="number" name="day" value="{{ data.day if data }}">
+      </div>
+      <button type="submit" class="button">Add</button>
+    </form>
+    <div class="birthdays">
+      <h2>Birthdays</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for birthday in birthdays %}
+          <tr>
+            <td>{{ birthday.name }}</td>
+            <td>{{ birthday.month }}/{{ birthday.day }}</td>
+            <td>
+              <form action="/remove-birthday" method="POST">
+                <input type="hidden" name="id" value="{{ birthday.id }}">
+                <button type="submit"><img src="/assets/minus.svg" alt="Remove"></button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 {% endblock content %}

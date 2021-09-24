@@ -1,5 +1,5 @@
 <div class="message-popup {{ 'active' if success or error }}">
-  <img src="{{ '/assets/success.svg' if success }}{{ '/assets/error.png' if error }}" 
+  <img src="{{ '/assets/success.png' if success }}{{ '/assets/error.png' if error }}" 
   alt="{{ 'success' if success}}{{ 'error' if error }}">
   {{ error or success }}
 </div>
