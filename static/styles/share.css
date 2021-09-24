@@ -1,0 +1,7 @@
+.birthday-checks {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 2.4rem;
+}
+

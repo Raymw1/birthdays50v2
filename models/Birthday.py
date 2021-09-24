@@ -15,3 +15,6 @@ def createBirth(name, month, day, user_id):
 
 def deleteBirth(id):
   return db.execute("DELETE FROM birthdays WHERE id = ?", id)
+
+def shareBirth(sender, receiver, id):
+  return db.execute("INSERT INTO shared (sender_id, receiver_id, birthday_id) VALUES (?, ?, ?)", sender, receiver, id)

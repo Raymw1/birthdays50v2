@@ -8,5 +8,11 @@ def createUser(email, username, password):
   user_id = db.execute("INSERT INTO users (email, username, password) VALUES (?, ?, ?);", email, username, password)
   return user_id;
 
-def getUser(email):
+def getUser(id):
+  return db.execute("SELECT * FROM users WHERE id = ?", id);
+
+def getUserByEmail(email):
   return db.execute("SELECT * FROM users WHERE email = ?", email);
+
+def getUserByName(name):
+  return db.execute("SELECT * FROM users WHERE username = ?", name);

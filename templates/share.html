@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block head %}
+  <link rel="stylesheet" href="/styles/form.css">
+  <link rel="stylesheet" href="/styles/birthdays.css">
+  <link rel="stylesheet" href="/styles/share.css">
+  <title>Birthdays</title>
+{% endblock head %}
+
+{% block content %}
+  <div class="box-container">
+    <h2>Birthdays</h2>
+    <form action="/share" method="POST">
+      <div class="birthday-checks">
+        {% for birthday in birthdays %}
+        <div>
+          <input type="checkbox" name="birthday" value="{{ birthday.id }}">
+          <label for="">{{ birthday.name }}</label>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" value="{{ data.username if data }}">
+      </div>
+      <button type="submit" class="button">Share</button>
+    </form>
+  </div>
+{% endblock content %}

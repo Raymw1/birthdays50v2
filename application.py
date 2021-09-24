@@ -1,5 +1,5 @@
-from models.Birthday import createBirth, deleteBirth, getBirth, getBirths
-from models.User import createUser, getUser
+from models.Birthday import createBirth, deleteBirth, getBirth, getBirths, shareBirth
+from models.User import createUser, getUser, getUserByEmail, getUserByName
 import os
 from tempfile import mkdtemp
 from flask import Flask, redirect, render_template, request, session, Response
@@ -69,7 +69,7 @@ def login():
     data = {"email": email}
     if not email or not password:
       return apology("login.html", "Please, fill all fields!", 400, data)
-    user = getUser(email)
+    user = getUserByEmail(email)
     if not user:
       return apology("login.html", "User not registered!", 400, data)
     user = user[0]
@@ -130,6 +130,31 @@ def removeBirthdays():
   return render_template("birthdays.html", birthdays=birthdays, success="Birthday removed!")
 
 
+# ------------------------- SHARE BIRTHDAYS --------------------------------
+@app.route("/share", methods=["GET", "POST"])
+@login_required
+def share():
+  if request.method == "POST":
+    birthdays = getBirths(session["user_id"])
+    births = request.form.getlist("birthday")
+    username = request.form.get("username")
+    data = {"username": username}
+    if not births:
+      return apologyBirth("share.html", "Please, insert at least one birthday!", birthdays, 400, data)
+    if not username:
+      return apologyBirth("share.html", "Please, insert an username!", birthdays, 400, data)
+    receiver = getUserByName(username)
+    if not receiver:
+      return apologyBirth("share.html", "Please, insert a valid username!", birthdays, 400, data)
+    receiver = receiver[0]["id"]
+    if receiver == session["user_id"]:
+      return apologyBirth("share.html", "Please, insert another username!", birthdays, 400, data)
+    for birth in births:
+      shareBirth(session["user_id"], receiver, int(birth))
+    return render_template("share.html", success="Birthday shared!", birthdays=birthdays)
+  else:
+    birthdays = getBirths(session["user_id"])
+    return render_template("share.html", birthdays=birthdays)
 
 # -------------------------  LOGOUT --------------------------------
 @app.route("/logout")
