@@ -36,6 +36,8 @@ db = database.db
 def index():
   return render_template("index.html")
 
+
+# ------------------------- RESGISTER --------------------------------
 @app.route("/register", methods=["GET", "POST"])
 @is_logged
 def register():
@@ -57,6 +59,7 @@ def register():
   else:
     return render_template("register.html")
 
+# -------------------------  LOGIN --------------------------------
 @app.route("/login", methods=["GET", "POST"])
 @is_logged
 def login():
@@ -77,6 +80,8 @@ def login():
   else:
     return render_template("login.html")
 
+
+# ------------------------- BIRTHDAYS --------------------------------
 @app.route("/birthdays", methods=["GET", "POST"])
 @login_required
 def birthdays():
@@ -104,5 +109,11 @@ def birthdays():
     return render_template("birthdays.html", birthdays=birthdays)
 
 
-# @app.route("/logout")
+# -------------------------  LOGOUT --------------------------------
+@app.route("/logout")
+def logout():
+    # Forget any user_id
+    session.clear()
+    # Redirect user to login form
+    return redirect("/")
 
