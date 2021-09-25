@@ -17,7 +17,12 @@ def deleteBirth(id):
   return db.execute("DELETE FROM birthdays WHERE id = ?", id)
 
 def shareBirth(sender, receiver, id):
-  return db.execute("INSERT INTO shared (sender_id, receiver_id, birthday_id) VALUES (?, ?, ?)", sender, receiver, id)
+  if not checkIfBirthExists(sender, id):
+    return db.execute("INSERT INTO shared (sender_id, receiver_id, birthday_id) VALUES (?, ?, ?)", sender, receiver, id)
+  return
+
+def checkIfBirthExists(sender, id):
+  return db.execute("SELECT * FROM shared WHERE sender_id = ? AND birthday_id = ?", sender, id)
 
 def getSharedBirth(id):
   return db.execute("SELECT * FROM shared WHERE id = ?", id)

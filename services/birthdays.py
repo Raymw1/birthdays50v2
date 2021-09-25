@@ -5,11 +5,12 @@ def formatSharedBirthdays(receiver_id):
   births = getSharedBirths(receiver_id)
   users = {}
   for birth in births:
+    birthToGet = getBirth(birth["birthday_id"])
+    birthToGet[0]["share_id"] = birth["id"]
     try:
-      users[getSenderName(birth["sender_id"])].append(getBirth(birth["birthday_id"])[0])
+      users[getSenderName(birth["sender_id"])].append(birthToGet[0])
     except:
-      users[getSenderName(birth["sender_id"])] = getBirth(birth["birthday_id"])
-  print(users)
+      users[getSenderName(birth["sender_id"])] = birthToGet
   return users
 
 def getSenderName(sender_id):

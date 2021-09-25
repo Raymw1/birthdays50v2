@@ -43,6 +43,10 @@ main.content {
   flex-direction: column;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* =============== BOX =============== */
 .box-container {
   background-color: var(--dark-color);

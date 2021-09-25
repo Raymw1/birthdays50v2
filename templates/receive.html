@@ -9,6 +9,7 @@
 {% block content %}
   <div class="box-container">
     <h2>Received Birthdays</h2>
+    {% if users %}
     {% for user in users %}
     <div class="birthdays">
       <h2>{{ user }}</h2>
@@ -27,7 +28,7 @@
             <td>{{ birthday.month }}/{{ birthday.day }}</td>
             <td>
               <form action="/remove-shared" method="POST">
-                <input type="hidden" name="id" value="{{ birthday.id }}">
+                <input type="hidden" name="id" value="{{ birthday.share_id }}">
                 <button type="submit"><img src="/assets/minus.svg" alt="Remove"></button>
               </form>
             </td>
@@ -37,5 +38,8 @@
       </table>
     </div>
     {% endfor %}
+    {% else %}
+    <p>You haven't received any birthdays yet!</p>
+    {% endif %}
   </div>
 {% endblock content %}

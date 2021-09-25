@@ -26,6 +26,7 @@
       </div>
       <button type="submit" class="button">Add</button>
     </form>
+    {% if birthdays %}
     <div class="birthdays">
       <h2>Birthdays</h2>
       <table>
@@ -52,5 +53,6 @@
         </tbody>
       </table>
     </div>
+    {% endif %}
   </div>
 {% endblock content %}
