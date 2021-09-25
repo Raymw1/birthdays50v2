@@ -1,4 +1,5 @@
-from models.Birthday import createBirth, deleteBirth, getBirth, getBirths, shareBirth
+from services.birthdays import formatSharedBirthdays
+from models.Birthday import createBirth, deleteBirth, deleteSharedBirth, getBirth, getBirths, getSharedBirth, shareBirth
 from models.User import createUser, getUser, getUserByEmail, getUserByName
 import os
 from tempfile import mkdtemp
@@ -155,6 +156,33 @@ def share():
   else:
     birthdays = getBirths(session["user_id"])
     return render_template("share.html", birthdays=birthdays)
+
+# ------------------------- RECEIVE BIRTHDAYS --------------------------------
+@app.route("/receive")
+@login_required
+def receive():
+  users = formatSharedBirthdays(session["user_id"])
+  return render_template("receive.html", users=users)
+
+
+# ------------------------- REMOVE SHARED BIRTHDAY --------------------------------
+@app.route("/remove-shared", methods=["POST"])
+@login_required
+def removeShared():
+  id = request.form.get("id")
+  users = formatSharedBirthdays(session["user_id"])
+  if not id:
+    return render_template("receive.html", error="Please, choose a birthday!", users=users), 400
+  birthday = getSharedBirth(id)
+  if not birthday:
+    return render_template("receive.html", error="Please, insert a valid birthday!", users=users), 400
+  birthday = birthday[0]
+  if birthday["receiver_id"] != session["user_id"]:
+    return render_template("receive.html", error="Please, insert a birthday from your list!", users=users), 400
+  deleteSharedBirth(id)
+  users = formatSharedBirthdays(session["user_id"])
+  return render_template("receive.html", users=users, success="Birthday removed!")
+
 
 # -------------------------  LOGOUT --------------------------------
 @app.route("/logout")
