@@ -29,29 +29,31 @@
     {% if birthdays %}
     <div class="birthdays">
       <h2>Birthdays</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Birthday</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for birthday in birthdays %}
-          <tr>
-            <td>{{ birthday.name }}</td>
-            <td>{{ birthday.month }}/{{ birthday.day }}</td>
-            <td>
-              <form action="/remove-birthday" method="POST">
-                <input type="hidden" name="id" value="{{ birthday.id }}">
-                <button type="submit"><img src="/assets/minus.svg" alt="Remove"></button>
-              </form>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="birthdays-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Birthday</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for birthday in birthdays %}
+            <tr>
+              <td>{{ birthday.name }}</td>
+              <td>{{ birthday.month }}/{{ birthday.day }}</td>
+              <td>
+                <form action="/remove-birthday" method="POST">
+                  <input type="hidden" name="id" value="{{ birthday.id }}">
+                  <button type="submit"><img src="/assets/minus.svg" alt="Remove"></button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
     {% endif %}
   </div>

@@ -105,3 +105,14 @@ button {
   height: 2.4rem;
   margin-right: 1.2rem;
 }
+
+.birthdays-table {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+.birthdays-table td {
+  word-wrap: break-word;
+    white-space: nowrap;
+}
