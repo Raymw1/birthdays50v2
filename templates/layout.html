@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/styles/main.css">
   <link rel="stylesheet" href="/styles/header.css">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   {% block head %}
   <link rel="stylesheet" href="/styles/index.css">
   <title>Birthdays50</title>
@@ -32,6 +33,7 @@
             <a href="/register"><li>Register</li></a>
             {% endif %}
           </ul>
+          <a href="#" onclick="Header.open(event)"><i class="material-icons">menu</i></a>
         </nav>
       </div>
     </header>
@@ -41,5 +43,6 @@
     </main>
   </div>
   {% include "partials/messagePopup.html" %}
+  <script src="/scripts/header.js"></script>
 </body>
 </html>

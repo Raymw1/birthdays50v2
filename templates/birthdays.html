@@ -12,16 +12,16 @@
     <form action="/birthdays" method="POST">
       <div class="input-group">
         <label for="name">Name</label>
-        <input type="text" name="name" value="{{ data.name if data }}">
+        <input type="text" name="name" id="name " value="{{ data.name if data }}">
       </div>
       <div class="input-grid">
         <div class="input-group">
           <label for="month">Month</label>
-          <input type="number" name="month" value="{{ data.month if data }}">
+          <input type="number" name="month" id="month" value="{{ data.month if data }}">
         </div>
         <div class="input-group">
           <label for="day">Day</label>
-          <input type="number" name="day" value="{{ data.day if data }}">
+          <input type="number" name="day" id="day" value="{{ data.day if data }}">
         </div>
       </div>
       <button type="submit" class="button">Add</button>
